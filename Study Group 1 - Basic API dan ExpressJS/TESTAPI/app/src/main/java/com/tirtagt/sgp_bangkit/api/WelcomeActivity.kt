@@ -44,14 +44,15 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
 
+        // Jika sudah login, langsung masuk ke main activity saja
+        if (checkAlreadyLoggedIn()) {
+            val a = Intent(this, MainActivity::class.java)
+            startActivity(a)
+            finish()
+        }
+
         loginButton = findViewById(R.id.button2)
         loginButton.setOnClickListener { onLoginButtonClicked() }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        loginButton = findViewById(R.id.button2)
     }
 
     private fun onLoginButtonClicked() {
@@ -76,13 +77,13 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onFirebaseAuthResult(result: IdpResponse?, error: String?) {
-        if (result == null) {
-            Toast.makeText(this, "Tidak ada respon dari firebase", Toast.LENGTH_SHORT).show()
+        if (error != null) {
+            Toast.makeText(this, "Error: ".plus(error), Toast.LENGTH_SHORT).show()
             return
         }
 
-        if (error != null) {
-            Toast.makeText(this, "Error: ".plus(error), Toast.LENGTH_SHORT).show()
+        if (result == null) {
+            Toast.makeText(this, "Tidak ada respon dari firebase", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -97,5 +98,9 @@ class WelcomeActivity : AppCompatActivity() {
         val a = Intent(this, MainActivity::class.java)
         startActivity(a)
         finish()
+    }
+
+    private fun checkAlreadyLoggedIn(): Boolean {
+        return FirebaseAuth.getInstance().currentUser != null
     }
 }

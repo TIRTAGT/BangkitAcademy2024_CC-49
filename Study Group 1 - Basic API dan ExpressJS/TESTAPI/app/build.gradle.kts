@@ -45,6 +45,10 @@ dependencies {
     // Import the Firebase BoM
     implementation(platform(libs.firebase.bom))
 
+    // API Library
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

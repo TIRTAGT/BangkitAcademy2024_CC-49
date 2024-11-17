@@ -2,16 +2,20 @@
   "name": "basic-api-dan-expressjs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx dotenvx run -- node src/index.js"
   },
   "author": "Matthew Tirtawidjaja",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.1"
+    "@dotenvx/dotenvx": "^1.24.0",
+    "@google-cloud/cloud-sql-connector": "^1.4.0",
+    "express": "^4.21.1",
+    "firebase-admin": "^13.0.0",
+    "mysql2": "^3.11.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.0"
